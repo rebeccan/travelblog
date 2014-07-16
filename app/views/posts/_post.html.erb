@@ -1,0 +1,22 @@
+<div class="journey_post_menu">
+	<div class="journey_post_pic tilt">
+		<%= url = get_url_post_main_photo(post)
+	    link_to image_tag(url,  :size => "100x100", :class => "journey_post_img"), post, :class=>"journey_post_pic" %>
+		<div>
+			<%= post.title%>
+		</div>
+		<div>
+			<% if user_signed_in? %>
+				<% if post.draft? %>
+					draft
+				<%end %>
+				<%= link_to edit_post_path(post) do%>
+					<i class="glyphicon glyphicon-pencil white"></i>
+				<% end %>
+				<%= link_to post, confirm: 'Do you really want to delete this post?', method: :delete do%>
+    				<i class="glyphicon glyphicon-trash white"></i>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

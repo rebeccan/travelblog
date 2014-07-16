@@ -1,0 +1,12 @@
+<h2><%= @gallery.name %></h2>
+
+<div class="galleria">
+    <%= render @photos %>
+</div>
+
+<script>
+    Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
+    Galleria.run('.galleria');
+</script>
+
+<%= link_to 'Back to Galleries', galleries_path %>

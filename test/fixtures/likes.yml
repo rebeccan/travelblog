@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  author: Lisa Simpson
+  post_id: 1
+
+two:
+  author: Bart Simpson
+  post_id: 1
+
+three:
+  author: Homer Simpson
+  post_id: 2

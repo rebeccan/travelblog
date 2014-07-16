@@ -1,0 +1,46 @@
+<div class="lead journey-text">
+	<div class="journey-text-picture">
+		<div class="journey_post_pic">
+			<a href="<%= get_url_post_main_photo_gallery(@post) %>">
+				<%=
+					url = get_url_post_main_photo(@post)
+		        	image_tag(url, :size => "125x125", :class => "journey_post_img")
+		        %>
+	    	</a>
+		</div>
+	</div>
+	<h1><%= @post.title %></h1>
+	<div>
+		(<%= @post.date %>)
+	</div>
+	<div>
+		<%= raw get_mark_down_html(@post.text) %>
+	</div>
+	<%= link_to 'Back to Journey', journey_path(@journey) %>
+</div>
+
+
+<%#likes
+%>
+<div>
+	<%= render "likes/form" %>
+	<%= @count_likes%> Likes
+</div>
+
+<%#comments
+%>
+<div class="well">
+ 	<h3>Add a Comment</h3>
+   	<%= render "comments/form" %>
+</div>
+
+<%if(@comments.length > 0) %>
+	<div class="panel panel-default">
+	  <div class="panel-heading">Comments</div>
+	  	<div class="panel-body">  	
+	   		<div class="list-group">
+				<%= render @comments %>
+			</div>
+	  	</div>
+	</div>
+<%end%>

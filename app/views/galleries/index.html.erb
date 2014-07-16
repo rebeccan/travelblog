@@ -1,0 +1,49 @@
+<% content_for :title, "Galleries" %>
+<h1>Galleries</h1>
+
+	<div class="galleries_menu">
+
+		<% if user_signed_in? %>
+		<% # plus picture with css and svg
+		%>
+			<div class="journey_post_menu">
+				<div class="journey_post_pic">
+					<div class="plus" onClick="window.location.href = '<%= new_gallery_path %>'">
+						<%= render 'layouts/plus_svg' %>
+					</div>
+					<div>
+					<span class="lead" style="font-size: 11pt">New Gallery</span>
+					<br>
+					&nbsp;
+				</div>
+				</div>
+			</div>
+		<% end %>
+		
+		
+		<% @galleries.each do |gallery| %>
+	
+		<div class="journey_post_menu">
+			<div class="journey_post_pic tilt" style="text-align: center">
+	
+				<%=url = get_url_post_main_photo(gallery.post)
+	        	link_to image_tag(url, :size => "100x100", :class => "journey_post_img"), gallery, :class => "journey_post_pic" %>
+				<div>
+					<span class="lead" style="font-size: 11pt"><%= gallery.name %></span>
+					<br>
+					<% if user_signed_in? %>
+						<%= link_to edit_gallery_path(gallery) do%>
+							<i class="glyphicon glyphicon-pencil white"></i>
+						<% end %>
+						<%= link_to gallery, confirm: "Do you really want to delete this gallery?",
+						method: :delete do %>
+    						<i class="glyphicon glyphicon-trash white"></i>
+						<% end %>
+					<% end %>		
+				</div>
+			</div>
+		</div>
+
+		<% end %>
+		
+	</div>

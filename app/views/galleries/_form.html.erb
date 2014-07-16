@@ -1,0 +1,31 @@
+<%= form_for(@gallery) do |f| %>
+
+	<% if @gallery.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@gallery.errors.count, "error") %> prohibited
+			this gallery from being saved:</h2>
+			<ul>
+				<% @gallery.errors.full_messages.each do |msg| %>
+				<li>
+					<%= msg %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+    <table class="table">
+        <tr>
+            <td class="table-form-caption"><%= f.label :name %></td>
+            <td><%= f.text_field :name %></td>
+        </tr>
+        <tr>
+ 			<%= f.select :post_id, Post.all.map {|d| [d.title, d.id]},
+            prompt: "Please select"%>
+        </tr>  
+    </table>
+
+    <div class="actions">
+        <%= f.submit "Save", class: "btn btn-primary" %>
+    </div>
+<% end %>

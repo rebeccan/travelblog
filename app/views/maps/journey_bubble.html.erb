@@ -1,0 +1,12 @@
+<h4><%= @journey.title %></h4>
+
+<% if @post %>
+	<h5><%= @post.title %></h5>
+	<%= raw get_mark_down_html(@post.text) %>
+<% else %>
+	<%=url = get_url_journey_main_photo(@journey)
+        	link_to image_tag(url, :size => "100x100"), @journey, :class => "journey_bubble_pic" %>
+	<%= raw get_mark_down_html(@journey.text) %>
+
+	<a href="<%= journey_path(@journey, latitude: @latitude, longitude: @longitude) %>">read more</a>
+<% end %>

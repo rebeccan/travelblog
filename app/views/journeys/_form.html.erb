@@ -1,0 +1,108 @@
+<script type="text/javascript">
+    var originalHex;
+
+    function formatHex(hex) {
+        var hex = hex.toUpperCase();
+        
+        if(hex.match(/^#.*$/))
+            hex = hex.substr(1);
+
+        return hex;
+    }
+
+    function setPin(hex) {
+        hex = formatHex(hex);
+        $("[id^='marker_color_pin_']").removeClass("marked");
+        
+        var pin = $("#marker_color_pin_" + hex);
+        if(pin) {
+            pin.addClass("marked");
+        }
+
+        $.ajax({  
+                url: "<%= marker_check_path %>/",  
+                data: {
+                    color: hex
+                },
+                dataType: "json",
+                success: function(data) {  
+                    if(data.in_use && hex != originalHex)
+                        $("#color_in_use").show();
+                    else
+                        $("#color_in_use").hide();
+                }  
+            }
+        ); 
+    }
+
+    $(document).ready(function() {
+        originalHex = formatHex("<%= @journey.marker_color %>");
+        setPin("<%= @journey.marker_color %>");
+    });
+</script>
+
+
+<%= form_for(@journey) do |f| %>
+
+<% if @journey.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@journey.errors.count, "error") %> prohibited
+	this journey from being saved:</h2>
+	<ul>
+		<% @journey.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+
+    <table class="table">
+        <tr>
+        	<td class="table-form-caption"><%= f.label :title %></td>
+        	<td><%= f.text_field :title %></td>
+        </tr>
+        <tr>
+			<td class="table-form-caption"><%= f.label :start%> </td>
+			<td><%= f.date_select :start%></td>
+		</tr>
+		<tr>
+			<td class="table-form-caption"><%= f.label :end%> </td>
+			<td><%= f.date_select :end%> </td>
+		</tr>
+        <tr>
+        	<td class="table-form-caption"><%= f.label :public %></td>
+        	<td><%= f.check_box :public %></td>
+        </tr>
+            
+        <tr>
+        	<td class="table-form-caption"><%= f.label :password %></td>
+        	<td><%= f.text_field :password %></td>
+        </tr>
+
+        <tr>
+        	<td class="table-form-caption"><%= f.label :text %></td>
+        	<td><%= f.text_area :text %></td>
+    	</tr>
+
+    	<tr>
+        	<td class="table-form-caption"><%= f.label :marker_color %></td>
+
+        	<td>
+                <% %w( FE7667 FE9134 FDEC75 BAE5FC 699AF8 95EC8C 00BF3C CB9FF8 FDABF9 CD9E80 ).each do |hex| %>
+                    <img src="<%= marker_path(hex)%>" id="marker_color_pin_<%= hex %>" class="markerImg" onClick="setPin('<%= hex %>'); $('#marker_color_hex_text_field').val('#<%= hex %>')" /> 
+                <% end %>
+                <span id="color_in_use" style="display: none">Color already in use!</span>
+                <br>
+                <div class="marker_color_toggle"><a href="#" onClick="$('.marker_color_toggle').toggle()">Manuell</a></div>
+                <div class="marker_color_toggle" style="display: none"><br>Hex: <%= f.text_field :marker_color, :id => "marker_color_hex_text_field", :onchange => "setPin($(this).val())" %></div>
+            </td>
+    	</tr>
+    </table>
+
+    <div class="actions">
+		<%= f.submit "Save", class: "btn btn-primary" %>
+	</div>
+<% end %>

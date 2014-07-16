@@ -1,0 +1,44 @@
+<div class="mapeditform">
+    <input type="hidden" name="id" value="<%= @id %>" />
+    <input type="hidden" name="latitude" value="<%= @latitude %>" />
+    <input type="hidden" name="longitude" value="<%= @longitude %>" />
+    
+    <input type="hidden" name="requestForgeryProtectionToken" value="<%= request_forgery_protection_token.to_s %>" />
+    <input type="hidden" name="formAuthenticityToken" value="<%= form_authenticity_token %>" />
+
+    <table>
+        <tr>
+            <td colspan="2">
+                <input type="text" name="title" value="<%= @title %>" style="width: 250px; font-size: 15pt; font-weight: bold">
+            </td>
+        </tr>
+
+        <tr>
+            <td>Latitude:</td>
+            <td><%= @latitude %></td>
+        </tr>
+        <tr>
+            <td>Longitude:</td>
+            <td><%= @longitude %></td>
+        </tr>
+
+        <tr>
+            <% if @view_mode == :add %>
+                <td colspan="2" style="text-align: right">
+                    <span class="status"></span>
+                    <input type="button" class="submitBtn" value="Add" style="width: 70px" onClick="return marker_add_submit(this, '<%= @id_type %>');" />
+                </td>
+            <% elsif @view_mode == :edit %>
+                <tr><td><td colspan="2">&nbsp;</td></tr>
+                <td>
+                    <input type="hidden" name="waypoint" value="<%= @waypoint.id %>" />
+                    <span class="delLink"><a href="#" onClick="return marker_delete_submit(this, '<%= @id_type %>');">Delete</a></span>
+                </td>
+                <td style="text-align: right">
+                    <span class="status"></span>
+                    <input type="button" class="submitBtn" value="Update" style="width: 70px" onClick="return marker_edit_submit(this, '<%= @id_type %>');" />
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: http://s3.aws.amazon.com/travelblog/public/kangooroo.jpg
+  post_main: false
+  travel_main: false
+  gallery_id: 1
+
+two:
+  url: http://s3.aws.amazon.com/travelblog/public/opera.jpg
+  post_main: true
+  travel_main: false
+  gallery_id: 1
+
+three:
+  url: http://s3.aws.amazon.com/travelblog/public/bus_stop.jpg
+  post_main: true
+  travel_main: false
+  gallery_id: 2

@@ -1,0 +1,72 @@
+journey_waypoints = JSON.parse("<%= raw escape_javascript @journey_waypoints.to_json %>");
+markerImages = new Object();
+
+
+function initializeJourneys() {
+	directionsDisplay = new google.maps.DirectionsRenderer();
+	var mapOptions = {
+		zoom: 2,
+		center: new google.maps.LatLng(48.9174129, 11.4079934)
+	}
+	map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	directionsDisplay.setMap(map);
+	addMarkers();
+}	
+
+$(document).ready(initializeJourneys);
+$(document).on("page:load", initializeJourneys);
+
+function addMarkers() {
+	for(var i = 0; i < journey_waypoints.length; i++) {
+		var journey = journey_waypoints[i];
+
+		for(var j = 0; j < journey.waypoints.length; j++) {
+			var wp = journey.waypoints[j];
+
+			var title = journey.title;
+
+			var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(wp.latitude, wp.longitude),
+				map: map,
+				icon: coloredMarkerImage(journey.color),
+			});
+
+			attachBubble(marker, journey, wp);
+		}
+	}
+}
+
+function attachBubble(marker, journey, waypoint) {
+	var bubble = new google.maps.InfoWindow({
+		content: journey.title
+	});
+
+	google.maps.event.addListener(marker, "click", function() {
+		$.ajax({  
+				url: "/maps/data/" + journey.id,  
+				data: {
+					latitude: waypoint.latitude,
+					longitude: waypoint.longitude
+				},
+				success: function(data) {  
+					bubble.setContent(data);  
+					bubble.open(map, marker);  
+				}  
+			}
+		); 
+		bubble.open(marker.get("map"), marker);
+	});
+}
+
+function coloredMarkerImage(color) {
+	color = color.replace(/^#/, "");
+
+	if(!(color in markerImages)) {
+		markerImages[color] = new google.maps.MarkerImage("<%= marker_path %>/" + color,
+			new google.maps.Size(21, 34),
+			new google.maps.Point(0,0),
+			new google.maps.Point(10, 34));
+	}
+	
+	return markerImages[color];
+}

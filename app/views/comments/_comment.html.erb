@@ -1,0 +1,20 @@
+
+<li class="list-group-item">
+
+	<h4 class="list-group-item-heading">
+		Author: <%= comment.author %>
+	</h4>
+
+	<p class="list-group-item-text">
+		<%= comment.body %>
+		
+		<% if user_signed_in? %>
+			
+			<%= link_to [comment.post, comment], confirm: 'Do you really want to delete this comment?', method: :delete do%>
+    			<i style="float:right;" class="glyphicon glyphicon-trash black"></i>
+			<% end %>
+		<% end %>
+	</p>
+	
+
+</li>

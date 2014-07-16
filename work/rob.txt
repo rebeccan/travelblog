@@ -1,0 +1,118 @@
+
+Models:
+===============
+Like 
+Post
+Comment
+Gallery
+Journey
+Photo
+Waypoint
+RouteWaypointOrder
+Route
+
+
+rails generate model Gallery name:string
+rails generate model Photo url:string main:boolean travel_main:boolean gallery:references
+
+rails generate model Post title:string date:date text:text draft:boolean
+rails generate model Like author:string post:references
+
+
+
+
+rails generate model Journey title:string start:date end:date text:text public:boolean password:string marker_color:string
+
+rails generate model Route travel_mode:string show_on_overview:boolean route_waypoint_order:references
+
+rails generate model RouteWaypointOrder order:integer route:references waypoint:references
+
+rails generate model Waypoint name:string longitude:float latitude:float 
+
+rails generate model MarkerBinary color:string image:binary
+
+
+# Testen
+rake db:migrate
+rake test test/models/gallery_test.rb     oder    rake test test/models/*s
+
+
+# Acive Record Datatypes:
+:primary_key
+:string
+:text
+:integer
+:float
+:decimal
+:datetime
+:timestamp
+:time
+:date
+:binary
+:boolean
+
+
+# Git
+http://rogerdudler.github.io/git-guide/
+git push origin <branch_name_remote>
+git branch <neuer_branch> <branch_der_kopiert_wird>
+
+Mergen: geh in den Branch, in den die Änderungen hinein sollen:
+	git branch <old_branch>
+... und dann mergen
+	git merge <branch_mit_den_Änderungen>
+
+
+git branch -d <branch_der_gelöscht_werden_soll>
+
+
+
+Einen Branch als Master ersetzen:
+git checkout seotweaks
+git merge -s ours master
+git checkout master
+git merge seotweaks
+
+Einzelne Dateien aus einzelnen Commit holen + ersetzen: git checkout fh238hrqwnd98h23or datei1.txt datei2.exe
+
+Branch zurücksetzen auf Commit-Stand: git reset --hard jr832iufsdnd23908qwd0
+
+
+
+Waypoint-Colors
+==================
+#FE7667
+#FE9134
+#FDEC75
+#BAE5FC
+#699AF8
+#95EC8C
+#00BF3C
+#CB9FF8
+#FDABF9
+#CD9E80
+
+
+
+Views
+========
+Übersichtsseite (MapOverview)
+Reise anguggen (Journey)
+Post anguggen (Post)
+Login (Devise CanCan)
+
+Reise anlegen/editieren
+Post anlegen/editieren (Bild hochladen)
+
+Karten-Funktionen
+====================
+Karten anzeigen (Bubbles verlinken)
+Suchfunktion
+Wegpunkte einfügen/löschen
+Wegpunkte verbinden
+Bubbles einblenden können
+
+
+
+
+

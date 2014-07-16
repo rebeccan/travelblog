@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  title: Alle meine Australien-Urlaube
+  start: 2012-04-22
+  end: 2014-04-22
+  text: nur Kurztripps - deshalb zu Posts zusammengefasst
+  public: true
+  password: 
+  marker_color: ff0000
+
+two:
+  id: 2
+  title: Timbuktu
+  start: 2014-04-22
+  end: 2014-04-22
+  text: Meine Reisen in Timbuktu und mein Uniaufenthalt
+  public: true
+  password: 
+  marker_color: 00ff00

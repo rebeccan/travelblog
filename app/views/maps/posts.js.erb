@@ -1,0 +1,74 @@
+routes = JSON.parse("<%= raw escape_javascript @routes.to_json %>");
+markerImages = new Object();
+
+var rendererOptions = {
+  draggable: false,
+  suppressMarkers: true,
+};
+
+
+function initializePosts() {
+  directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+  
+  var mapOptions = {
+    zoom: <%= @zoom %>,
+    center: new google.maps.LatLng(<%= @latitude %>, <%= @longitude %>),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+
+  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  
+  directionsDisplay.setMap(map);
+  
+  addRoutes();
+} 
+
+$(document).ready(initializePosts);
+$(document).on("page:load", initializePosts);
+
+function addRoutes() {
+  for(var i = 0; i < routes.length; i++) {
+    var route = routes[i];
+    var waypoints = route.waypoints;
+
+    if(waypoints.length >= 3)
+      show_addMultipleWaypointsRoute(route.color, route.travel_mode, waypoints);
+    else if(waypoints.length == 2)
+      show_addSimpleRoute(route.color, route.travel_mode, waypoints[0], waypoints[1]);
+    else if(waypoints.length == 1)
+      show_addMarker(route.color, waypoints[0]);
+  }
+}
+
+function show_addMultipleWaypointsRoute(route_color, travel_mode, waypoints) {
+  var markers = addMultipleWaypointsRoute(route_color, travel_mode, waypoints);
+
+  for(var i = 0, marker; marker = markers[i]; i++) {
+    attachBubble(marker, waypoints[i]);
+  }
+}
+
+function show_addSimpleRoute(route_color, travel_mode, start, end) {
+  var markers = addSimpleRoute(route_color, travel_mode, start, end);
+
+  attachBubble(markers[0], start);
+  attachBubble(markers[1], end);
+}
+
+function show_addMarker(route_color, waypoint) {
+  var marker = addMarker(route_color, waypoint);
+
+  attachBubble(marker, waypoint);
+}
+
+function attachBubble(marker, waypoint) {
+  var bubble = new google.maps.InfoWindow({
+    content: "<h5>" + waypoint.title + "<h5><a href=\"/posts/" + waypoint.post + "\">read more</a>"
+  });
+
+  google.maps.event.addListener(marker, "click", function() {
+    bubble.open(marker.get("map"), marker);
+  });
+}
+
+<%= render "directions" %>

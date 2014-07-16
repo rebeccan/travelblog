@@ -1,0 +1,46 @@
+<%= form_for(@post) do |f| %>
+
+	<% if @post.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@post.errors.count, "error") %> prohibited
+			this post from being saved:</h2>
+			<ul>
+				<% @post.errors.full_messages.each do |msg| %>
+				<li>
+					<%= msg %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	
+    <%= f.hidden_field :journey, :value => @journey.id %>
+
+    <table class="table">
+        <tr>
+            <td class="table-form-caption"><%= f.label :title %></td>
+            <td><%= f.text_field :title %></td>
+        </tr>
+        <tr>
+            <td class="table-form-caption"><%= f.label :journey %></td>
+            <td> <%= @journey.title %></td>
+        </tr>
+        <tr>
+            <td class="table-form-caption"><%= f.label :date %></td>
+            <td><%= f.date_select :date %></td>
+        </tr>
+        <tr>
+            <td class="table-form-caption"><%= f.label :text %></td>
+            <td><%= f.text_area :text %></td>
+        </tr>
+
+    </table>
+
+	<%= f.hidden_field :post_id, :value => @post.id%>
+	<%= f.hidden_field :name, :value => :title %>
+	
+    <div class="actions">
+        <%= f.submit "Save", class: "btn btn-primary" %>
+    </div>
+<% end %>
+

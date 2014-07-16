@@ -1,0 +1,44 @@
+<% content_for :title, "#{@journey.title} Posts" %>
+<% content_for :map, "posts" %>
+<% content_for :map_journey, @journey.id.to_s %>
+
+<div style="float: left; padding-right:15px"><h1><%= @journey.title %> Posts</h1></div>
+<div style="padding-top: 40px; font-size: 11pt" class="hidden-xs lead"><%= @journey.start %> - <%= @journey.end %></div>
+
+<div class="journeys_posts_menu">
+	<% if user_signed_in? %>
+		<div class="journey_post_menu">
+			<div class="journey_post_pic">
+				<div class="plus" onClick="window.location.href = '<%= new_identified_journey_post_path(@journey) %>'">
+					<%= render 'layouts/plus_svg' %>
+				</div>
+				<div>
+					<span class="lead" style="font-size: 11pt">New Post</span>
+					<br>
+					&nbsp;
+				</div>
+			</div>
+		</div>
+	<% end %>
+	
+	<%= render @posts %>
+</div>
+
+<div class="lead journey-text">
+	<div class="journey-text-picture">
+		<div class="journey_post_pic">
+			<a href="<%= get_url_journey_main_photo_gallery(@journey) %>">
+				<%=
+					url = get_url_journey_main_photo(@journey)
+		        	image_tag(url, :size => "125x125", :class => "journey_post_img")
+		        %>
+		    </a>
+		</div>
+	</div>
+	<div>
+		<%= raw get_mark_down_html(@journey.text) %>
+	</div>
+	<%= link_to 'Back to Journeys', journeys_path %>
+</div>
+
+<div id="map-canvas" style="width: 100%; height: 500px;"></div>

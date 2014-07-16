@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+route_Opera_Single:
+  # Opera_Single
+  id: 1
+  travel_mode: 
+  show_on_overview: true
+  route_able_type: Journey
+  route_able_id: 1
+
+route_From_Opera_to_All_Airports:
+  # From_Opera_to_All_Airports
+  id: 2
+  travel_mode: Driving
+  show_on_overview: false
+  route_able_type: Post
+  route_able_id: 1
+
+route_Timbuktu_Institute_of_Technology:
+  # Timbuktu Institute of Technology
+  id: 3
+  travel_mode:
+  show_on_overview: true
+  route_able_type: Journey
+  route_able_id: 2
+
+route_Timbuktu_Bar_Tour:
+  # Timbuktu Bar Tour
+  id: 4
+  travel_mode: Bar Tour
+  show_on_overview: false
+  route_able_type: Post
+  route_able_id: 2
+
+route_Timbuktu_Colleges_Tour:
+  # Timbuktu Colleges Tour
+  id: 5
+  travel_mode: Colleges Tour
+  show_on_overview: false
+  route_able_type: Journey
+  route_able_id: 2

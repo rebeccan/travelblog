@@ -1,0 +1,30 @@
+<div class="header">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="navbar-header">
+          <ul class="nav navbar-nav">
+            <li class="active"><%= link_to "Travelblog", root_path %></li>
+            <li class="hidden-xs"><%= link_to "Gallery", galleries_path %></li>
+            
+            <% if user_signed_in? %>
+  				<li class="hidden-xs"><%= link_to 'Edit profile', edit_user_registration_path %> </li>
+  				<li class="hidden-xs"><%= link_to "Logout", destroy_user_session_path, method: :delete %> </li>
+			<% else %>
+ 			<li class="hidden-xs"><%= link_to "Login", new_user_session_path %></li>
+			<% end %>
+          </ul>
+        </div>
+        <div class="devise-info hidden-xs">
+        	<% if user_signed_in? %>
+ 		 		<p>Logged in as <strong><%= current_user.email %></strong>.</p>
+     		<% end %>
+        	<%#flash messages for devise
+  	  		%>
+  	 		<p><%= notice %></p>
+     		<p><%= alert %></p>
+     	</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  name: Australien 2014
+  post_id: 1
+#  photo_id: 
+
+two:
+  name: Timbuktu 2013
+  post_id: 2
+
+three:
+  name: Testgalerie ohne Post
+  post_id: 

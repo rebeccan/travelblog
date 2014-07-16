@@ -1,0 +1,120 @@
+function marker_add_submit(form, type) {
+	var form = $(form).parentsUntil("div[class=mapeditform]").parent(); 
+
+	var titleInput = form.find("input[name=title]");
+
+	var latitudeInput = form.find("input[name=latitude]");
+	var longitudeInput = form.find("input[name=longitude]");
+	var postInput = form.find("input[name=id]");
+
+	var requestForgeryProtectionToken = form.find("input[name=requestForgeryProtectionToken]").val();
+	var formAuthenticityToken = form.find("input[name=formAuthenticityToken]").val();
+
+	var lat = latitudeInput.val();
+
+	var statusSpan = form.find("span[class=status]");
+	statusSpan.text("Adding ...");
+
+	var submitButton = form.find("input[class=submitBtn]");
+	submitButton.prop("disabled", true);
+
+	var dataObj = {
+			title: titleInput.val(),
+			latitude: latitudeInput.val(),
+			longitude: longitudeInput.val(),
+			id: postInput.val(),
+			id_type: type
+		};
+	dataObj[requestForgeryProtectionToken] = formAuthenticityToken;
+
+	$.ajax({
+		url: "/maps/marker_edit/" + type + "/add.json",
+		type: "POST",
+		dataType: "json",
+		async: true,
+		data: dataObj,
+	})
+	.done(function() {
+		statusSpan.text("Added!");
+	})
+	.fail(function(a, b, c) {
+		console.log("Error!");
+	})
+	.always(function() {
+		submitButton.prop("disabled", false);
+	});
+}
+
+function marker_edit_submit(form, type) {
+	var form = $(form).parentsUntil("div[class=mapeditform]").parent(); 
+
+	var titleInput = form.find("input[name=title]");
+	var wpInput = form.find("input[name=waypoint]");
+
+	var requestForgeryProtectionToken = form.find("input[name=requestForgeryProtectionToken]").val();
+	var formAuthenticityToken = form.find("input[name=formAuthenticityToken]").val();
+
+	var statusSpan = form.find("span[class=status]");
+	statusSpan.text("Updating ...");
+
+	var submitButton = form.find("input[class=submitBtn]");
+	submitButton.prop("disabled", true);
+
+	var dataObj = {
+			title: titleInput.val(),
+			waypoint: wpInput.val()
+		};
+	dataObj[requestForgeryProtectionToken] = formAuthenticityToken;
+
+	$.ajax({
+		url: "/maps/marker_edit/" + type + "/edit.json",
+		type: "POST",
+		dataType: "json",
+		async: true,
+		data: dataObj,
+	})
+	.done(function() {
+		statusSpan.text("Updated!");
+	})
+	.fail(function(a, b, c) {
+		console.log("Error!");
+	})
+	.always(function() {
+		submitButton.prop("disabled", false);
+	});
+}
+
+function marker_delete_submit(form, type) {
+	var form = $(form).parentsUntil("div[class=mapeditform]").parent(); 
+
+	var wpInput = form.find("input[name=waypoint]");
+
+	var requestForgeryProtectionToken = form.find("input[name=requestForgeryProtectionToken]").val();
+	var formAuthenticityToken = form.find("input[name=formAuthenticityToken]").val();
+
+	var statusSpan = form.find("span[class=status]");
+	statusSpan.text("Deleting ...");
+
+	var submitButton = form.find("input[class=submitBtn]");
+	submitButton.prop("disabled", true);
+
+	var dataObj = {
+			waypoint: wpInput.val()
+		};
+	dataObj[requestForgeryProtectionToken] = formAuthenticityToken;
+
+	$.ajax({
+		url: "/maps/marker_edit/" + type + "/del.json",
+		type: "POST",
+		dataType: "json",
+		async: true,
+		data: dataObj,
+	})
+	.done(function() {
+		statusSpan.text("Deleted!");
+	})
+	.fail(function(a, b, c) {
+		console.log("Error!");
+		submitButton.prop("disabled", false);
+	});
+}

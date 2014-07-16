@@ -1,0 +1,54 @@
+<% content_for :title, "Journeys" %>
+<% content_for :map, "journeys" %>
+<h1>Journeys</h1>
+
+<div class="journeys_posts_menu">
+
+	<% if user_signed_in? %>
+		<% # plus picture with css and svg
+		%>
+		<div class="journey_post_menu">
+			<div class="journey_post_pic">
+				<div class="plus" onClick="window.location.href = '<%= new_journey_path %>'">
+					<%= render "layouts/plus_svg" %>
+				</div>
+				<div>
+					<span class="lead" style="font-size: 11pt">New Journey</span>
+					<br>
+					&nbsp;
+				</div>
+			</div>
+		</div>
+	<% end %>
+
+	<% @journeys.each do |journey| %>
+
+		<div class="journey_post_menu">
+			<div class="journey_post_pic tilt" style="text-align: center">
+
+				<%=url = get_url_journey_main_photo(journey)
+	        	link_to image_tag(url, :size => "100x100", :class => "journey_post_img"), journey, :class => "journey_post_pic" %>
+				<div>
+					<span class="lead" style="font-size: 11pt"><%= journey.title %></span>
+
+					<br>
+					<% if user_signed_in? %>
+						<% if journey.public? %>
+							public 
+						<% end %>
+						<%= link_to edit_journey_path(journey) do%>
+							<i class="glyphicon glyphicon-pencil white"></i>
+						<% end %>
+						<%= link_to journey, confirm: "Do you really want to delete this journey?",
+						method: :delete do %>
+    						<i class="glyphicon glyphicon-trash white"></i>
+						<% end %>
+					<% end %>		
+				</div>
+			</div>
+		</div>
+
+	<% end %>
+</div>
+
+<div id="map-canvas" style="width: 100%; height: 500px;"></div>

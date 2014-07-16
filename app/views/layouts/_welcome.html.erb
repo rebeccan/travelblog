@@ -1,0 +1,17 @@
+<% if !user_signed_in? && User.find_by(email: "change_email@example.com") %>
+
+	<div>
+		<br>
+		Welcome to your new Travelblog!
+		<br>
+		Login as:
+		<br>
+		Email: <strong>change_email@example.com</strong>
+		<br>
+		Password: <strong>change_pwd</strong>
+		<br>
+		Edit your profile to change your credentials!
+	</div>
+	
+<% end %>
+

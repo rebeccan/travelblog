@@ -1,0 +1,27 @@
+# Installation
+Requirements: Ruby on Rails (4.0.4)
+
+The web application is the folder 'travelblog' which is located in the folder /appsource. Import travelblog into Aptana as a Ruby on Rails project.
+
+Steps:
+- bundle install
+- rake db:migrate
+- rake db:seed
+- rails server
+- Show Travelblog on configured web server (maybe 127.0.0.1:3000)
+- Login with:
+	Email: change_email@example.com
+	Password: change_pwd
+- (Note that the user is not forced to change his credentials in development mode)
+
+For running tests: rake test test/models/
+
+# Use in development mode
+- in config/environments/development.rb:
+	enter emailaddress and password for account with which to send reset password emails
+
+# Using as an Official Hosted Blog (production mode)
+- Make sure starting the Ruby on Rails webserver in productive mode
+- Configure Google Maps API Key in the productive app configration
+- Change your login credentials
+- configure e-mail sending for reset passwords

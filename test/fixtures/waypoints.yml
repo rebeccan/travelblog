@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% 
+names = %w(Opera Fake2 Fake3 Fake4 Fake5 Fake6 Fake7 Fake8 Fake9 Fake10)
+%>
+
+<% 1.upto(10) do |i| %>
+random_<%= i %>:
+  id: <%= i %>
+  name: <%= names[i - 1] %>
+  longitude: <%= rand() %>
+  latitude: <%= rand() %>
+<% end %>

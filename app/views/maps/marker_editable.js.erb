@@ -1,0 +1,184 @@
+routes = JSON.parse("<%= raw escape_javascript @routes.to_json %>");
+markerImages = new Object();
+lastWPBubble = null;
+
+var rendererOptions = {
+  draggable: false,
+  suppressMarkers: true,
+};
+
+
+function initializePosts() {
+  directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+  
+  var searchMarkers = [];
+
+  var mapOptions = {
+    zoom: <%= @zoom %>,
+    center: new google.maps.LatLng(<%= @latitude %>, <%= @longitude %>),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+
+  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  
+  directionsDisplay.setMap(map)
+
+  // Code from https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
+  var input = document.getElementById("pac-input");
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  var searchBox = new google.maps.places.SearchBox(input);
+
+  google.maps.event.addListener(searchBox, "places_changed", function() {
+    var places = searchBox.getPlaces();
+
+    for (var i = 0, marker; marker = searchMarkers[i]; i++) 
+      marker.setMap(null);
+
+    searchMarkers = [];
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0, place; place = places[i]; i++) {
+      var image = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+      var marker = new google.maps.Marker({
+        map: map,
+        icon: image,
+        title: place.name,
+        position: place.geometry.location
+      });
+
+      searchMarkers.push(marker);
+
+      attachAddWPBubble(marker, $(input).val(), <%= @id %>);
+
+      bounds.extend(place.geometry.location);
+    }
+
+    map.fitBounds(bounds);
+  });
+
+  google.maps.event.addListener(map, "bounds_changed", function() {
+    var bounds = map.getBounds();
+    searchBox.setBounds(bounds);
+  });
+
+
+  addRoutes();
+} 
+
+$(document).ready(initializePosts);
+$(document).on("page:load", initializePosts);
+
+function addRoutes() {
+  for(var i = 0; i < routes.length; i++) {
+    var route = routes[i];
+    var waypoints = route.waypoints;
+    var travelMode = route.travel_mode;
+
+    if(waypoints.length >= 3 && travelMode != "")
+      edit_addMultipleWaypointsRoute(route.color, route.travel_mode, waypoints);
+    else if(waypoints.length == 2 && travelMode != "")
+      edit_addSimpleRoute(route.color, route.travel_mode, waypoints[0], waypoints[1]);
+    else if(waypoints.length == 1)
+      edit_addMarker(route.color, waypoints[0]);
+    else if(waypoints.length > 1 && travelMode == "")
+      edit_addMarkers(route.color, waypoints);
+  }
+}
+
+function edit_addMultipleWaypointsRoute(markerColor, travelMode, waypoints) {
+  var markers = addMultipleWaypointsRoute(markerColor, travelMode, waypoints);
+
+  for(var i = 0, marker; marker = markers[i]; i++) {
+    attachEditWPBubble(marker, waypoints[i]);
+  }
+}
+
+function edit_addSimpleRoute(markerColor, travelMode, start, end) {
+  var markers = addSimpleRoute(markerColor, travelMode, start, end);
+
+  attachEditWPBubble(markers[0], start);
+  attachEditWPBubble(markers[1], end);
+}
+
+function edit_addMarker(markerColor, waypoint) {
+  var marker = addMarker(markerColor, waypoint);
+
+  attachEditWPBubble(marker, waypoint);
+}
+
+function edit_addMarkers(markerColor, waypoints) {
+  for(var i = 0, waypoint; waypoint = waypoints[i]; i++) {
+    var marker = addMarker(markerColor, waypoint);
+
+    attachEditWPBubble(marker, waypoint);
+  }
+}
+
+function attachAddWPBubble(marker, title, postId) {
+  var bubble = new google.maps.InfoWindow({
+    content: "Form is loading ..."
+  });
+
+  google.maps.event.addListener(marker, "click", function() {
+    $.ajax({  
+        url: "<%= marker_add_path(@id_type) %>",  
+        data: {
+          latitude: marker.position.lat(),
+          longitude: marker.position.lng(),
+          title: title,
+          <%= @id_type %>: postId
+        },
+        success: function(data) {  
+          bubble.setContent(data);
+          bubble.open(map, marker);  
+        }
+      }
+    ); 
+
+    if(lastWPBubble)
+      lastWPBubble.close();
+
+    lastWPBubble = bubble;
+
+    bubble.open(marker.get("map"), marker);
+  });  
+}
+
+function attachEditWPBubble(marker, waypoint) {
+  var bubble = new google.maps.InfoWindow({
+    content: "Form is loading ..."
+  });
+
+  google.maps.event.addListener(marker, "click", function() {
+    $.ajax({  
+        url: "<%= marker_edit_path(@id_type) %>",  
+        data: {
+          latitude: waypoint.latitude,
+          longitude: waypoint.longitude,
+          title: waypoint.title,
+          post: waypoint.post,
+          waypoint: waypoint.id
+        },
+        success: function(data) {  
+          bubble.setContent(data);
+          bubble.open(map, marker);  
+        }
+      }
+    ); 
+
+    if(lastWPBubble)
+      lastWPBubble.close();
+
+    lastWPBubble = bubble;
+
+    bubble.open(marker.get("map"), marker);
+  });  
+}
+
+<%= render "directions" %>

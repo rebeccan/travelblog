@@ -1,0 +1,90 @@
+function addMultipleWaypointsRoute(markerColor, travelMode, waypoints) {
+  var directionsService = new google.maps.DirectionsService();
+
+  var map_waypoints = new Array();
+  var map_markers = new Array();
+
+  var start = waypoints[0];
+  var end = waypoints[waypoints.length - 1];
+
+  var start_marker = addMarker(markerColor, start);
+  map_markers.push(start_marker);
+
+  for(var i = 1; i < waypoints.length - 1; i++) {
+    var wp = waypoints[i];
+    var wp_obj = new Object();
+
+    wp_obj["location"] = new google.maps.LatLng(wp.latitude, wp.longitude);
+    wp_obj["stopover"] = true;
+    map_waypoints.push(wp_obj);
+
+    var marker = addMarker(markerColor, wp);
+    map_markers.push(marker);
+  }
+
+  // Available travel modes: https://developers.google.com/maps/documentation/javascript/directions#TravelModes
+  directionsService.route({
+    origin: new google.maps.LatLng(start.latitude, start.longitude),
+    destination: new google.maps.LatLng(end.latitude, end.longitude),
+    waypoints: map_waypoints,
+    optimizeWaypoints: true,
+    travelMode: google.maps.TravelMode[travelMode.toUpperCase()]
+  }, function(result) {
+    renderDirections(result);
+  });
+  
+  var end_marker = addMarker(markerColor, end);
+  map_markers.push(end_marker);
+
+  return map_markers; 
+}
+
+function addSimpleRoute(markerColor, travelMode, start, end) {
+  var directionsService = new google.maps.DirectionsService();
+
+  directionsService.route({
+    origin: new google.maps.LatLng(start.latitude, start.longitude),
+    destination: new google.maps.LatLng(end.latitude, end.longitude),
+    travelMode: google.maps.TravelMode[travelMode.toUpperCase()]
+  }, function(result) {
+    renderDirections(result);
+  });
+
+  var startMarker = addMarker(markerColor, start);
+  var endMarker = addMarker(markerColor, end);
+
+  var map_markers = new Array();
+  map_markers.push(startMarker);
+  map_markers.push(endMarker);
+
+  return map_markers;
+}
+
+function renderDirections(result) {
+  var directionsRenderer = new google.maps.DirectionsRenderer(rendererOptions);
+  directionsRenderer.setMap(map);
+  directionsRenderer.setDirections(result);
+}
+
+function addMarker(markerColor, waypoint) {
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(waypoint.latitude, waypoint.longitude),
+    map: map,
+    icon: coloredMarkerImage(markerColor)
+  });
+
+  return marker;
+} 
+
+function coloredMarkerImage(color) {
+  color = color.replace(/^#/, "");
+
+  if(!(color in markerImages)) {
+    markerImages[color] = new google.maps.MarkerImage("<%= marker_path %>/" + color,
+      new google.maps.Size(21, 34),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(10, 34));
+  }
+  
+  return markerImages[color];
+}

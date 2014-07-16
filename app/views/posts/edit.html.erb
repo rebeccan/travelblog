@@ -1,0 +1,49 @@
+<% @title = "edit" %> 
+
+<% content_for :title, "Edit Post" %>
+<% content_for :map, "marker_editable" %>
+<% content_for :map_journey, @journey.id.to_s %>
+<% content_for :map_post, @post.id.to_s %>
+
+<h2> Edit post
+	<%= link_to @post, confirm: 'Do you really want to delete this post?', method: :delete do%>
+    	<i style="float:right" class="glyphicon glyphicon-trash black"></i>
+	<% end %>	
+</h2>
+
+<%= render 'form' %>
+
+<h3>Edit Map</h3>
+
+<input id="pac-input" class="controls" type="text" placeholder="Search Box" onkeypress="return event.keyCode != 13;">
+<div id="map-canvas" style="width: 100%; height: 500px;"></div>
+
+<h4>Picture Upload</h4>
+
+<div class="well">
+	<%= form_for @photo, html: { multipart: true } do |f| %>
+	<table class="table">
+        <tr>
+            <td class="table-form-caption"><%= f.label :url %></td>
+			<td><%= f.file_field :url %></td>
+       	</tr>
+       	<tr>
+       		<td class="table-form-caption"><%= f.label :travel_main%></td>
+    		<td><%= f.check_box :travel_main %></td>
+    	</tr>
+		<tr>
+       		<td class="table-form-caption"><%= f.label :post_main%></td>
+	 		<td><%= f.check_box :post_main %></td>
+		</tr>
+		</table>    
+   
+	<%= f.hidden_field :gallery_id, :value => @gallery.id %>
+
+    <div class="actions">
+        <%= f.submit "Save", class: "btn btn-primary" %>
+    </div>
+    
+<% end %>
+
+
+<p><%= link_to "back to journeys", journeys_path%></p>

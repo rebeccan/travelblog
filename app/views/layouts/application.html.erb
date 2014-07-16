@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= @title_wo_yield %><%= unless yield(:title).blank? then " - #{yield(:title)}" else "" end %></title>
+  
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  
+  <% unless yield(:map).blank? %>
+  	<script src="<%= raw @maps_script_url %>"></script>
+  	<script src="<%= maps_data_path(yield(:map), yield(:map_journey), yield(:map_post)) %>"></script>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <style type="text/css">.journeys_posts_menu { height: 180px; }</style>
+  <% end %>
+
+</head>
+<body>
+
+	<%= render "layouts/header" %>
+
+  <div class="container content">
+    <%= render "layouts/welcome" %>
+     
+	  <%= yield %>
+  </div>
+  
+</body>
+</html>

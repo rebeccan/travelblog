@@ -1,0 +1,79 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+route_wp_order_Opera_Single:
+  id: 1
+  order: 1
+  route_id: 1
+  waypoint_id: 1
+
+route_wp_order_From_Opera_to_All_Airports_1:
+  id: 2
+  order: 1
+  route_id: 2
+  waypoint_id: 1
+
+route_wp_order_From_Opera_to_All_Airports_2:
+  id: 3
+  order: 2
+  route_id: 2
+  waypoint_id: 2
+
+route_wp_order_From_Opera_to_All_Airports_3:
+  id: 4
+  order: 3
+  route_id: 2
+  waypoint_id: 3
+
+route_wp_order_From_Opera_to_All_Airports_4:
+  id: 5
+  order: 4
+  route_id: 2
+  waypoint_id: 4
+
+route_wp_order_Timbuktu_Institute_of_Technology:
+  id: 6
+  order: 1
+  route_id: 3
+  waypoint_id: 5
+
+route_wp_order_Timbuktu_Bar_Tour_1:
+  id: 7
+  order: 1
+  route_id: 4
+  waypoint_id: 6
+
+route_wp_order_Timbuktu_Bar_Tour_2:
+  id: 8
+  order: 2
+  route_id: 4
+  waypoint_id: 7
+
+route_wp_order_Timbuktu_Bar_Tour_3:
+  id: 9
+  order: 3
+  route_id: 4
+  waypoint_id: 8
+
+route_wp_order_Timbuktu_Colleges_Tour_1:
+  id: 10
+  order: 1
+  route_id: 5
+  waypoint_id: 7
+
+route_wp_order_Timbuktu_Colleges_Tour_2:
+  id: 11
+  order: 2
+  route_id: 5
+  waypoint_id: 9
+
+route_wp_order_Timbuktu_Colleges_Tour_3:
+  id: 12
+  order: 3
+  route_id: 5
+  waypoint_id: 10
+
+route_wp_order_Timbuktu_Colleges_Tour_4:
+  id: 13
+  order: 4
+  route_id: 5
+  waypoint_id: 7

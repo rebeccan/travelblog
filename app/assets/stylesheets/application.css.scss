@@ -1,0 +1,211 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+h1 { 
+	font-size:1.3em; 
+}
+
+body {
+  padding-top: 50px;
+  background-image: asset-url("background.png", image);
+}
+
+.container.content {
+  box-shadow: 0 0 30px black;
+  background-color: #ffffff;
+  padding-bottom: 15px;
+}
+
+.journey_post_menu {
+  display: inline-block;
+  margin-right: 1em;
+  height: 150px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+          box-sizing: border-box;
+}
+ 
+
+.journey_post_img {
+  border: 5px solid #ffffff;  
+  -webkit-box-shadow: 5px 5px 5px #111;
+          box-shadow: 5px 5px 5px #111;  
+}
+
+.journey_post_img:hover { 
+  -webkit-filter: brightness(120%);
+}
+
+.tilt {
+  padding-top: 15px;
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+ 
+.tilt:hover {
+  -webkit-transform: rotate(-10deg);
+     -moz-transform: rotate(-10deg);
+       -o-transform: rotate(-10deg);
+      -ms-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+}
+
+.journeys_posts_menu {
+  height: 150px;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100%;
+  
+  width: calc(100% + 30px);
+  margin-left: -15px;
+  padding-left: 15px;
+  background-color: #333;
+  background-image: asset-url("album_slide_background.png", image);
+  color: #ffffff;
+
+  margin-bottom: 15px;
+}
+
+.galleries_menu {
+  
+  width: calc(100% + 30px);
+  margin-left: -15px;
+  padding-left: 15px;
+  background-color: #333;
+  background-image: asset-url("album_slide_background.png", image);
+  color: #ffffff;
+
+}
+
+.journey_post_pic {
+
+}
+
+.journey_bubble_pic {
+  float: left;
+  margin-right: 10px;
+}
+
+.plus {
+	background: none repeat scroll 0 0 #BBBBBB;
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.devise-info{
+  color: #ffffff;
+  float: right;
+  font-size: 0.85em;
+}
+
+.table-form-caption {
+  width: 100px;
+}
+
+.journey-text {
+  margin: 0px 0px auto; 
+  padding: 15px;
+
+  background-image: asset-url("post_text_background.png", image);
+
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+     -moz-box-shadow: 0 10px 6px -6px #777;
+          box-shadow: 0 10px 6px -6px #777;
+}
+
+.journey-text-picture {
+  float: left; 
+  width: 125px; 
+  height: 125px;
+  margin-left: -25px;
+  margin-top: -25px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+
+  -webkit-transform: rotate(10deg);
+     -moz-transform: rotate(10deg);
+       -o-transform: rotate(10deg);
+      -ms-transform: rotate(10deg);
+          transform: rotate(10deg);
+
+  border: 5px solid #ffffff;  
+  border-left: 1px solid #eee;
+  border-top: 1px solid #eee;
+
+  -webkit-box-shadow: 5px 5px 5px #eee;
+          box-shadow: 5px 5px 5px #eee;  
+}
+
+/* marker for maps and color selections */
+.markerImg {
+  cursor: pointer;
+}
+
+.markerImg.marked {
+  background-image: asset-url("markerBg.png", image);
+}
+
+.white {
+    color: white;
+}
+
+.black {
+    color: black;
+}
+
+/* pac = search text field in google maps */
+#pac-input {
+  background-color: #fff;
+  padding: 0 11px 0 13px;
+  width: 400px;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  text-overflow: ellipsis;
+
+  margin-top: 16px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+  margin-left: -1px;
+  padding-left: 14px;  /* Regular padding-left + 1. */
+  width: 401px;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+/* Interactive JS gallery */
+.galleria { 
+  width: 100%; height: 600px; background: #000 
+}
