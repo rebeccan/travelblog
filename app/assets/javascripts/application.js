@@ -10,6 +10,9 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// ...
 //= require jquery
 //= require jquery_ujs
+//= require galleria/galleria-1.3.6.min.js
+//= require galleria/themes/classic/galleria.classic.min.js
 //= require_tree .
