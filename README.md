@@ -1,7 +1,7 @@
 # Installation
 Requirements: Ruby on Rails (4.0.4)
 
-The web application is located in the folder /appsource. Import travelblog into Aptana as a Ruby on Rails project.
+Import travelblog into Aptana as a Ruby on Rails project.
 
 Steps:
 - bundle install

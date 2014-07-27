@@ -15,4 +15,6 @@
 //= require jquery_ujs
 //= require galleria/galleria-1.3.6.min.js
 //= require galleria/themes/classic/galleria.classic.min.js
+//= require bootstrap-3.2.0-dist/js/bootstrap.min
+//= require bootstrap-3.2.0-dist/js/bootstrap
 //= require_tree .

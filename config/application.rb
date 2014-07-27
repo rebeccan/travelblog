@@ -36,5 +36,8 @@ module Travelblog
     #setting up vendors
     config.assets.paths << "#{Rails.root}/vendor/assets/libs"
     
+    #precompile bootstrap fonts
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+    
   end
 end
