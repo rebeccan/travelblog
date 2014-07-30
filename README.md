@@ -5,7 +5,9 @@ Description
 -----------
 
 The Ruby On Rails Travelblog provides a Webpage for Travellers who like to share their experience...
-
+![Journeys](https://raw.github.com/rebeccan/travelblog/master/preview/1JourneysIndex.png)
+![JourneysSignedIn](https://raw.github.com/rebeccan/travelblog/master/preview/2JourneysIndexSignedIn.png)
+![Journey](https://raw.github.com/rebeccan/travelblog/master/preview/3JourneyShow.png)
 
 Installation - Development
 --------------------------
