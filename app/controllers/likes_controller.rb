@@ -5,8 +5,17 @@ class LikesController < ApplicationController
   
   def create
     @post = Post.find(params[:post_id])
-    @like = @post.likes.create(params[:like])
-    redirect_to post_path(@post)
+    @post.likes.create(params[:like])
+    #use in JS function to manipulate DOM
+    @count_likes = @post.likes.length 
+   
+    respond_to do |format|
+      format.html { redirect_to post_path(@post) }
+      format.js {
+          #manipulate DOM + make Like button disappear
+          render :template => 'likes/create.js.erb'
+        }
+    end
   end
   
 end

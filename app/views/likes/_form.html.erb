@@ -1,8 +1,7 @@
-<%= form_for([@post, @post.likes.build]) do |f| %>
+<%= form_for([@post, @post.likes.build], remote: true) do |f| %>
 
 	<%= button_tag(type: 'submit', class: "rate-btn yes-btn btn btn-default btn-sm") do %>
 	  <span class="glyphicon glyphicon-thumbs-up"></span> 
 	<% end %>
 
 <% end %>
-

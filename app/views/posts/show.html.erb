@@ -23,8 +23,12 @@
 <%#likes
 %>
 <div>
-	<%= render "likes/form" %>
-	<%= @count_likes%> Likes
+	<div class="like-form">
+		<%= render "likes/form" %>
+	</div>
+	<div class="like-count">
+		<%= @count_likes%> Likes
+	</div>
 </div>
 
 <%#comments
