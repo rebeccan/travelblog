@@ -32,6 +32,7 @@ Installation - Hosted Blog
 - Make sure starting the Ruby on Rails webserver in productive mode
 - Configure Google Maps API Key in the productive app configration
 - Change your login credentials
+- Configure Mandrill or other E-Mail Server for passwort resets and write it in production.rb/development.rb
 
 
 Third Party
