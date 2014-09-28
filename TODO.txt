@@ -1,0 +1,2 @@
+- move everything from public folder to app/assets
+- make app for smart screens better (like not such a big menu which hides other things)
