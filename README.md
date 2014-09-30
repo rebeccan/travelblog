@@ -4,7 +4,11 @@ Travelblog
 Description
 -----------
 
-The Ruby On Rails Travelblog provides a Webpage for Travellers who like to share their experience...
+The Ruby On Rails Travelblog provides a map based Webpage for Travellers who like to share their experience!
+The project was started by 3 computer science students as a University project in 2014. 
+After that, it was published to share it with people, who like to make use of it :-) You are welcomed to use it as a travelblog or make even further development...
+Now, the project is still in development by one student and was not tested in productive mode yet.
+
 ![Journeys](/preview/1JourneysIndex.png)
 ![JourneysSignedIn](/preview/2JourneysIndexSignedIn.png)
 ![Journey](/preview/3JourneyShow.png)
@@ -29,8 +33,8 @@ Steps:
 	Enter emailaddress and password for account with which to send reset password emails
 
 
-Installation - Hosted Blog
---------------------------
+Installation - Production (Hosted Blog)
+---------------------------------------
 
 - Make sure starting the Ruby on Rails webserver in productive mode
 - Configure Google Maps API Key in the productive app configration
