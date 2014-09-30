@@ -9,8 +9,13 @@ The project was started by 3 computer science students as a University project i
 After that, it was published to share it with people, who like to make use of it :-) You are welcomed to use it as a travelblog or make even further development...
 Now, the project is still in development by one student, but it is not used in productive mode yet, as it feels still a bit incomplete.
 
+A menu of all journeys the traveller made and the marked map below:
 ![Journeys](/preview/1JourneysIndex.png)
+
+The traveller is logged in and can add, delete or modify Journeys:
 ![JourneysSignedIn](/preview/2JourneysIndexSignedIn.png)
+
+A journeys consists of several posts:
 ![Journey](/preview/3JourneyShow.png)
 
 Installation - Development
