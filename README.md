@@ -7,7 +7,7 @@ Description
 The Ruby On Rails Travelblog provides a map based Webpage for Travellers who like to share their experience!
 The project was started by 3 computer science students as a University project in 2014. 
 After that, it was published to share it with people, who like to make use of it :-) You are welcomed to use it as a travelblog or make even further development...
-Now, the project is still in development by one student and was not tested in productive mode yet.
+Now, the project is still in development by one student, but it is not used in productive mode yet, as it feels still a bit incomplete.
 
 ![Journeys](/preview/1JourneysIndex.png)
 ![JourneysSignedIn](/preview/2JourneysIndexSignedIn.png)
