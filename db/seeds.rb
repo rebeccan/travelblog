@@ -8,7 +8,7 @@
 
 journeys = Journey.create([
   {title: 'Australia', start: DateTime.new(2012,9,30), end: DateTime.new(2013,03,15), 
-  text: 'Australia was so lorem ipsum awesome! I was surfing in the morning before going to work. Surfing suckz but then I had an excuse for my boss. He tolerated starting working at noon when I promised him to improve my surfing skills daily.', public: true, marker_color: '#FE766F'}, 
+  text: 'Australia was so lorem ipsum awesome! I was surfing in the morning before going to work.', public: true, marker_color: '#FE766F'}, 
   {title: 'Thailand',start: DateTime.new(2014, 2, 18), end: DateTime.new(2014,3,16), 
   text: 'Thailand...', public: true, marker_color: '#FE9134'}, 
   {title: 'USA', start: DateTime.new(2011,9,30), end: DateTime.new(2012,3,15), 
@@ -26,7 +26,7 @@ posts = Post.create([
   {title: 'Khao Lak', date: DateTime.new(2014,3,2), text: 'Awesome beaches...', draft: false, journey_id: journeys[1].id },
   
   {title: 'Moscow', date: DateTime.new(2013,9,1), text: 'Moscow\'s Stalin Skyscrapers...', draft: false, journey_id: journeys[3].id },
-  {title: 'Sankt Petersburg', date: DateTime.new(2013,9,1), text: 'Vodka drinking...', draft: false, journey_id: journeys[3].id },
+  {title: 'Sankt Petersburg', date: DateTime.new(2013,9,1), text: 'A Paris-Venice mixture...', draft: false, journey_id: journeys[3].id },
   
   {title: 'New York', date: DateTime.new(2011,11,1), text: 'Brooklyn Bridge in NYC...', draft: false, journey_id: journeys[2].id },
   {title: 'West Coast', date: DateTime.new(2012,11,1), text: 'California ...', draft: false, journey_id: journeys[2].id },
