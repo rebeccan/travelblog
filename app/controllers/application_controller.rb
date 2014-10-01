@@ -3,7 +3,20 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :get_url_journey_main_photo, :get_url_post_main_photo, :get_mark_down_html, :get_url_post_main_photo_gallery, :get_url_journey_main_photo_gallery
-  before_filter :set_content_variables
+  before_filter :set_content_variables, :authenticate_readers
+  
+  
+  #ask blog readers for http username and passwort, if settings say so
+  protected 
+  def authenticate_readers
+    setting_http_authentication = Setting.find(1)
+    if(setting_http_authentication.boolean)
+      authenticate_or_request_with_http_basic do |username, password|
+        username == setting_http_authentication.attribute1 && password == setting_http_authentication.attribute2
+      end
+    end
+  end
+  
   
   def get_url_journey_main_photo(journey)
     url = ''

@@ -167,3 +167,10 @@ user.email = 'change_email@example.com'
 user.password = 'change_pwd'
 user.password_confirmation = 'change_pwd'
 user.save!
+
+setting_http_authentication = Setting.new
+setting_http_authentication.name = 'http_authentication'
+setting_http_authentication.boolean = false
+setting_http_authentication.attribute1 = ''
+setting_http_authentication.attribute2 = ''
+setting_http_authentication.save!

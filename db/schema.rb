@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625105938) do
+ActiveRecord::Schema.define(version: 20141001160500) do
 
   create_table "comments", force: true do |t|
     t.string   "author"
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 20140625105938) do
     t.boolean  "show_on_overview"
     t.integer  "route_able_id"
     t.string   "route_able_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "settings", force: true do |t|
+    t.string   "name"
+    t.boolean  "boolean"
+    t.string   "attribute1"
+    t.string   "attribute2"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

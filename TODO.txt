@@ -1,2 +1,13 @@
 - move everything from public folder to app/assets
+
 - make app for smart screens better (like not such a big menu which hides other things)
+
+- make whole website password protected (let user choose password in settings)
+
+- https
+
+- user can download a sqlite-database copy over the GUI
+
+- find out a good way for deployment: phusion passenger?
+
+- encrypt passwords in database and use salted hashs
