@@ -1,2 +1,10 @@
 <h1>Settings</h1>
-<%= render "settings/http_authentication" %>
+<% @settings.each do |setting| %>
+	<div>
+		<span class="lead" style="font-size: 11pt"><%= setting.name%></span>:
+		<span class="lead" style="font-size: 11pt"><%= setting.active%></span>
+		<%= link_to edit_setting_path(setting) do%>
+			<i class="glyphicon glyphicon-pencil black"></i>
+		<% end %>
+	</div>
+<% end %>

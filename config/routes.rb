@@ -31,7 +31,7 @@ Travelblog::Application.routes.draw do
   
   resources :photos, only: [:show, :new, :create, :destroy]
   
-  resources :settings, only: [:index, :show, :edit]
+  resources :settings, only: [:index, :edit, :update]
 
   get 'maps/data/:map(/:journey)(/:post).js' => 'maps#data', :as => "maps_data", :format => "js"
   get 'maps/data/:journey/(:post)' => 'maps#journey_bubble'

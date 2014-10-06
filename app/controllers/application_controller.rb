@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   protected 
   def authenticate_readers
     setting_http_authentication = Setting.find(1)
-    if(setting_http_authentication.boolean)
+    if(setting_http_authentication.active)
       authenticate_or_request_with_http_basic do |username, password|
         username == setting_http_authentication.attribute1 && password == setting_http_authentication.attribute2
       end
