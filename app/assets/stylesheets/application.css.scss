@@ -39,6 +39,10 @@ body {
   background-image: asset-url("background.png", image);
 }
 
+input:disabled {
+    color: grey;
+}
+
 .container.content {
   box-shadow: 0 0 30px black;
   background-color: #ffffff;
