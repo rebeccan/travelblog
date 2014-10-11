@@ -1,8 +1,9 @@
-<% #TODO: add a description why http authentication is useful (dissuation from lawyers for not having an impressum)
-#and explain that it is not supersafe
+<% #TODO: password confirmation, salted hash in DB and star input, even if password is not secret anyway?
 %>
-
-<% #TODO: password confirmation
+<% #TODO: Change Model logic to key-value pairs.
+# Difficulties: 
+# - One view will have to change several setting objects at once then.
+# - Different setting objects may need different views (checkbox vs. text field)
 %>
 
 <%= form_for @setting, html: {class: "form-horizontal"} do |setting_form| %>
@@ -27,6 +28,7 @@
 	<div class="col-sm-offset-2 col-sm-10">
 		Active: <%= setting_form.check_box :active, 
 		:onchange => "javascript:$('#httpcredentials :input').attr('disabled',!this.checked)" %>
+		<%= render 'http_auth_info' %>
 	</div>
 </div>
 <div id="httpcredentials">
